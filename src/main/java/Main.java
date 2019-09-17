@@ -10,14 +10,11 @@ public class Main {
 
 		int windowSize = 1000000;
 		double epsilon = 0.01;
-		double epsilonBound = 0.01;
-		logger.info("epsilon {}", epsilonBound / 2);
 		double delta = 0.1;
 		int Tk = 11244966;
 		int k = 4;
 		double thresholdBound = 0.009;
-		double threshold = thresholdBound - (epsilonBound / 2);
-		logger.info("threshold {}", threshold);
+		double threshold = thresholdBound - (epsilon / 2);
 
 		try {
 			//read the file from exhaustive counting into a normalized hashmap of pattern, frequencies
@@ -49,21 +46,16 @@ public class Main {
 					estimatedCount = estimatesNormalized.get(key);
 					relative_error += Math.abs(trueCount - estimatedCount) / trueCount;
 				}
-
 			}
 
 			System.out.println("relative error " + relative_error);
-
 			System.out.println("true positives: " + truePositives);
 			System.out.println("precision: " + (truePositives / (double) estimatesNormalized.size()));
 			System.out.println("recall: " + (truePositives / (double) groundTruthNormalized.size()));
-
 			System.out.println("sum of counters " + total + " " + subTotal);
-
 			System.out.println("sample sizes " + groundTruthNormalized.size() + "  " + estimatesNormalized.size());
-
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			logger.info("Exception caught {} " , ex.getLocalizedMessage());
 		}
 	}
 
