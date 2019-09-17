@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,7 +15,7 @@ public class Main {
 		double delta = 0.1;
 		int Tk = 11244966;
 		int k = 4;
-		double thresholdBound = 0.009;
+		double thresholdBound = 0.005;
 		double threshold = thresholdBound - (epsilon / 2);
 
 		try {
@@ -23,7 +25,7 @@ public class Main {
 					+ delta + "_" + Tk + "_" + k + "_" + "incremental-exhaustive-four-node" + ".log";
 			String fullPath = directory + inFileName;
 			logger.info("full path to file: {}", fullPath);
-			PatternCount patternCount = PatternCount.getPatterns(fullPath, threshold);
+			PatternCount patternCount = PatternCount.getPatterns(fullPath, thresholdBound);
 			THashMap<FourNodeGraphPattern, Double> groundTruthNormalized = patternCount.patterns;
 			long total = patternCount.totalCount;
 
